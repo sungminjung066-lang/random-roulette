@@ -11,33 +11,51 @@ body {
   min-height: 100vh;
 }
 
-/* ✅ 좌/우 배치 + 세로 중앙 정렬(핵심) */
+/* 좌/우 배치 */
 .container {
   min-height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: center; /* ⭐ 오른쪽 컨트롤이 룰렛 중심 높이와 맞춰짐 */
+  align-items: center;
   gap: 48px;
   padding: 32px 16px;
 }
 
 /* 왼쪽(룰렛) */
 .left {
-  position: relative; /* 포인터 기준 */
+  position: relative;
 }
 
-/* ✅ 포인터(룰렛 위 12시) */
+/* 💎 포인터 (보석 느낌) */
 .left::before {
   content: "";
   position: absolute;
-  width: 10px;
-  height: 50px;
-  border-radius: 5px;
-  background: #000;
-  top: -20px; /* 룰렛 위쪽 살짝 위 */
+  top: -34px;
   left: 50%;
-  transform: translateX(-50%);
-  z-index: 10;
+  transform: translateX(-50%) rotate(45deg);
+  width: 20px;
+  height: 20px;
+  background: linear-gradient(135deg, #ffd6e8, #ff4d8d);
+  border-radius: 4px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  z-index: 20;
+}
+
+/* ⭐ 결과 나올 때 포인터 튀는 효과 */
+@keyframes pointerPop {
+  0% {
+    transform: translateX(-50%) rotate(45deg) scale(1);
+  }
+  50% {
+    transform: translateX(-50%) rotate(45deg) scale(1.25);
+  }
+  100% {
+    transform: translateX(-50%) rotate(45deg) scale(1);
+  }
+}
+
+.left.result::before {
+  animation: pointerPop 0.3s ease;
 }
 
 canvas {
@@ -60,10 +78,11 @@ canvas {
 
 /* 버튼 */
 button {
-  background: #febf00;
+  background: #ea4444;
   padding: 0.85rem 1.4rem;
   border: none;
   font-size: 1.1rem;
+  color: #fff;
   font-weight: 900;
   border-radius: 10px;
   cursor: pointer;
@@ -138,16 +157,14 @@ button:disabled {
   }
 }
 
-/* ✅ 모바일: 위/아래로 */
+/* 모바일 */
 @media (max-width: 900px) {
   .container {
     flex-direction: column;
     gap: 24px;
-    padding-top: 24px;
   }
   .right {
     min-width: min(520px, 92vw);
-    width: min(520px, 92vw);
   }
   .btnCol {
     flex-direction: row;

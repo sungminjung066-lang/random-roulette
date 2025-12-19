@@ -7,23 +7,21 @@ const clearBtn = document.getElementById("clearBtn");
 const addBtn = document.getElementById("addBtn");
 const menuInput = document.getElementById("menuAdd");
 
-// 모달
 const modal = document.getElementById("resultModal");
 const modalText = document.getElementById("modalText");
 const closeBtn = document.getElementById("closeBtn");
 
-// 기본 메뉴
 const DEFAULT_PRODUCT = ["중국집", "구내식당", "햄버거", "순대국", "정식당"];
 let product = [...DEFAULT_PRODUCT];
 
 const colors = [
-  "#dc0936",
-  "#e6a742",
-  "#3f297e",
-  "#be61cf",
-  "#169ed8",
-  "#209b6c",
-  "#60b236",
+  "#eb95a7ff",
+  "#f0d8d0ff",
+  "#ec5353ff",
+  "#e88888ff",
+  "#efc894ff",
+  "#f7eca5ff",
+  "#a77255ff",
 ];
 
 let currentRotation = 0;
@@ -56,7 +54,6 @@ function newMake() {
   const ch = canvas.height / 2;
   const arc = (2 * Math.PI) / product.length;
 
-  // 부채꼴
   for (let i = 0; i < product.length; i++) {
     ctx.beginPath();
     ctx.fillStyle = colors[i % colors.length];
@@ -66,7 +63,6 @@ function newMake() {
     ctx.closePath();
   }
 
-  // 글자
   ctx.fillStyle = "#fff";
   ctx.font = "bold 24px Pretendard";
   ctx.textAlign = "center";
@@ -84,11 +80,10 @@ function newMake() {
   }
 }
 
-/* 결과 계산(포인터 12시와 일치) */
 function getResult() {
   const slice = 360 / product.length;
   const deg = currentRotation % 360;
-  const pointerAngle = (270 + deg) % 360; // 12시(270°) + 회전각
+  const pointerAngle = (270 + deg) % 360;
   const index = Math.floor((pointerAngle + 0.0001) / slice) % product.length;
   return product[index];
 }
@@ -105,7 +100,7 @@ function rotate() {
 
   setTimeout(() => {
     const randomDeg = Math.floor(Math.random() * 360);
-    currentRotation = randomDeg + 3600; // 여러 바퀴 + 랜덤
+    currentRotation = randomDeg + 3600;
     canvas.style.transition = "2s ease-out";
     canvas.style.transform = `rotate(-${currentRotation}deg)`;
   }, 1);
@@ -143,24 +138,26 @@ function clearAll() {
   newMake();
 }
 
-/* 회전 끝나면 모달 띄우기 */
 canvas.addEventListener("transitionend", () => {
   if (!isSpinning) return;
 
   modalText.textContent = getResult();
   modal.classList.remove("hidden");
 
+  /* ⭐ 포인터 애니메이션 트리거 */
+  const left = document.querySelector(".left");
+  left.classList.add("result");
+  setTimeout(() => left.classList.remove("result"), 300);
+
   isSpinning = false;
   spinBtn.disabled = resetBtn.disabled = clearBtn.disabled = false;
 });
 
-/* 모달 닫기 */
 closeBtn.onclick = () => modal.classList.add("hidden");
 modal.onclick = (e) => {
   if (e.target === modal) modal.classList.add("hidden");
 };
 
-/* 이벤트 */
 spinBtn.onclick = rotate;
 resetBtn.onclick = resetAll;
 clearBtn.onclick = clearAll;
@@ -169,5 +166,4 @@ menuInput.addEventListener("keydown", (e) => {
   if (e.key === "Enter") addMenu();
 });
 
-/* 시작 */
 newMake();
