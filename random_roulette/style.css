@@ -1,0 +1,80 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css");
+
+* {
+  font-family: Pretendard;
+}
+
+body {
+  background: #f7f8fc;
+  height: 960px;
+  margin: 0;
+}
+
+/* 룰렛(캔버스) */
+canvas {
+  margin-top: 100px;
+  transition: 2s; /* JS에서 transform: rotate(...) 주면 부드럽게 돌아감 */
+}
+
+/* 버튼 기본 스타일 */
+button {
+  z-index: 1000;
+  background: #febf00;
+  margin-top: 1rem;
+  padding: 0.8rem 1.8rem;
+  border: none;
+  font-size: 1.5rem;
+  font-weight: bold;
+  border-radius: 5px;
+  transition: 0.2s;
+  cursor: pointer;
+}
+
+button:active {
+  background: #444;
+  color: #f9f9f9;
+}
+
+/* 화면 중앙 정렬 컨테이너 */
+#menu {
+  width: 100%;
+  height: 960px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+  position: relative;
+}
+
+/* 룰렛 위에 있는 검은 포인터(표시 막대) */
+#menu::before {
+  margin-top: 100px;
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 50px;
+  border-radius: 5px;
+  background: #000;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 22;
+}
+
+/* 입력 영역(원본에는 별도 스타일이 거의 없어서 최소만) */
+#addDiv {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+  align-items: center;
+}
+
+#menuAdd {
+  height: 46px;
+  padding: 0 12px;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  outline: none;
+}
