@@ -11,20 +11,24 @@
     <div id="menu">
       <canvas id="wheel" width="600" height="600"></canvas>
 
-      <button id="spinBtn" type="button">돌려돌려 돌림판</button>
+      <div class="btnRow">
+        <button id="spinBtn">돌려돌려 돌림판</button>
+        <button id="resetBtn">초기화</button>
+        <button id="clearBtn">전체삭제</button>
+      </div>
 
       <div id="addDiv">
         <input type="text" id="menuAdd" placeholder="메뉴 입력" />
-        <button id="addBtn" type="button">메뉴 추가</button>
+        <button id="addBtn">메뉴 추가</button>
       </div>
     </div>
 
-    <!-- ✅ 결과 모달 -->
+    <!-- 결과 모달 -->
     <div id="resultModal" class="modal hidden">
       <div class="modal-box">
         <h2>결과 🎉</h2>
         <p id="modalText"></p>
-        <button id="closeBtn" type="button">확인</button>
+        <button id="closeBtn">확인</button>
       </div>
     </div>
   </body>
