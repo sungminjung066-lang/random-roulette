@@ -56,7 +56,6 @@ const rotate = () => {
     const rotate = ran + 3600;
     canvas.style.transition = `2s ease-out`;
     canvas.style.transform = `rotate(-${rotate}deg)`;
-
     setTimeout(() => {
       alert(`오늘의 메뉴는?`);
     }, 2000);
