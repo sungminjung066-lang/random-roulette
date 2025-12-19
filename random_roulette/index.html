@@ -2,27 +2,30 @@
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>식사 메뉴 룰렛(기본 틀)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>식사 메뉴 룰렛</title>
     <link rel="stylesheet" href="style.css" />
     <script defer src="app.js"></script>
   </head>
   <body>
     <div id="menu">
-      <!-- JS 연습 포인트: canvas에 룰렛 그리기 + canvas 회전시키기 -->
       <canvas id="wheel" width="600" height="600"></canvas>
 
-      <!-- JS 연습 포인트: 클릭 시 rotate() 같은 함수 실행 -->
       <button id="spinBtn" type="button">돌려돌려 돌림판</button>
 
       <div id="addDiv">
-        <!-- JS 연습 포인트: 입력값을 배열에 추가 -->
         <input type="text" id="menuAdd" placeholder="메뉴 입력" />
         <button id="addBtn" type="button">메뉴 추가</button>
       </div>
     </div>
 
-    <!-- JS는 네가 연습하려고 직접 작성 -->
-    <!-- <script src="app.js"></script> -->
+    <!-- ✅ 결과 모달 -->
+    <div id="resultModal" class="modal hidden">
+      <div class="modal-box">
+        <h2>결과 🎉</h2>
+        <p id="modalText"></p>
+        <button id="closeBtn" type="button">확인</button>
+      </div>
+    </div>
   </body>
 </html>
