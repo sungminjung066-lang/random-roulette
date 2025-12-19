@@ -63,6 +63,7 @@ function newMake() {
     ctx.moveTo(cw, ch);
     ctx.arc(cw, ch, cw, arc * i, arc * (i + 1));
     ctx.fill();
+    ctx.closePath();
   }
 
   ctx.fillStyle = "#fff";
@@ -82,7 +83,7 @@ function newMake() {
   }
 }
 
-/* 결과 계산 */
+/* 결과 계산 (화면 포인터(12시)와 일치) */
 function getResult() {
   const slice = 360 / product.length;
   const deg = currentRotation % 360;

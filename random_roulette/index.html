@@ -8,18 +8,24 @@
     <script defer src="app.js"></script>
   </head>
   <body>
-    <div id="menu">
-      <canvas id="wheel" width="600" height="600"></canvas>
-
-      <div class="btnRow">
-        <button id="spinBtn">돌려돌려 돌림판</button>
-        <button id="resetBtn">초기화</button>
-        <button id="clearBtn">전체삭제</button>
+    <div class="container">
+      <!-- 왼쪽: 룰렛 -->
+      <div class="left">
+        <canvas id="wheel" width="600" height="600"></canvas>
       </div>
 
-      <div id="addDiv">
-        <input type="text" id="menuAdd" placeholder="메뉴 입력" />
-        <button id="addBtn">메뉴 추가</button>
+      <!-- 오른쪽: 버튼/입력 -->
+      <div class="right">
+        <div class="btnRow">
+          <button id="spinBtn" type="button">돌려돌려 돌림판</button>
+          <button id="resetBtn" type="button">초기화</button>
+          <button id="clearBtn" type="button">전체삭제</button>
+        </div>
+
+        <div id="addDiv">
+          <input type="text" id="menuAdd" placeholder="메뉴 입력" />
+          <button id="addBtn" type="button">메뉴 추가</button>
+        </div>
       </div>
     </div>
 
@@ -28,7 +34,7 @@
       <div class="modal-box">
         <h2>결과 🎉</h2>
         <p id="modalText"></p>
-        <button id="closeBtn">확인</button>
+        <button id="closeBtn" type="button">확인</button>
       </div>
     </div>
   </body>

@@ -11,21 +11,64 @@ body {
   min-height: 100vh;
 }
 
+/* ✅ 좌/우 배치 */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 48px;
+  padding: 60px 16px;
+}
+
+/* 왼쪽(룰렛) */
+.left {
+  position: relative; /* 포인터(::before) 기준 */
+}
+
+/* ✅ 포인터: 이제 left 위에 붙임 */
+.left::before {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 50px;
+  border-radius: 5px;
+  background: #000;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+}
+
 /* 룰렛 */
 canvas {
-  margin-top: 100px;
   transition: 2s;
+  /* 기존 margin-top 제거: 좌/우 배치에서는 필요 없음 */
+}
+
+/* 오른쪽(컨트롤) */
+.right {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 90px; /* 룰렛 가운데 높이쯤 맞춰 보기 좋게 */
+  min-width: 320px;
+}
+
+/* 버튼 묶음 */
+.btnRow {
+  display: flex;
+  flex-direction: column; /* 오른쪽에 세로로 쌓기 */
+  gap: 10px;
 }
 
 /* 버튼 */
 button {
   background: #febf00;
-  margin-top: 1rem;
-  padding: 0.8rem 1.6rem;
+  padding: 0.85rem 1.4rem;
   border: none;
   font-size: 1.1rem;
   font-weight: bold;
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
   transition: 0.2s;
 }
@@ -40,51 +83,22 @@ button:disabled {
   cursor: not-allowed;
 }
 
-.btnRow {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-/* 중앙 정렬 */
-#menu {
-  width: 100%;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  position: relative;
-}
-
-/* 포인터 */
-#menu::before {
-  margin-top: 100px;
-  content: "";
-  position: absolute;
-  width: 10px;
-  height: 50px;
-  border-radius: 5px;
-  background: #000;
-  top: -20px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 10;
-}
-
 /* 입력 영역 */
 #addDiv {
   display: flex;
   gap: 10px;
-  margin-top: 12px;
+  align-items: center;
 }
 
 #menuAdd {
+  flex: 1;
   height: 44px;
   padding: 0 12px;
   font-size: 1rem;
-  border-radius: 6px;
+  border-radius: 8px;
   border: 1px solid #ddd;
   outline: none;
+  background: #fff;
 }
 
 /* 모달 */
@@ -108,6 +122,7 @@ button:disabled {
   border-radius: 16px;
   text-align: center;
   animation: pop 0.25s ease;
+  min-width: 260px;
 }
 
 .modal-box p {
@@ -123,5 +138,22 @@ button:disabled {
   to {
     transform: scale(1);
     opacity: 1;
+  }
+}
+
+/* ✅ 모바일에서는 위/아래로 쌓이게(보너스) */
+@media (max-width: 900px) {
+  .container {
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+  }
+  .right {
+    margin-top: 0;
+    min-width: min(520px, 92vw);
+  }
+  .btnRow {
+    flex-direction: row;
+    flex-wrap: wrap;
   }
 }
