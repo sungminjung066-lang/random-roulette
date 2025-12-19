@@ -11,21 +11,22 @@ body {
   min-height: 100vh;
 }
 
-/* ✅ 좌/우 배치 */
+/* ✅ 좌/우 배치 + 세로 중앙 정렬(핵심) */
 .container {
+  min-height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center; /* ⭐ 오른쪽 컨트롤이 룰렛 중심 높이와 맞춰짐 */
   gap: 48px;
-  padding: 60px 16px;
+  padding: 32px 16px;
 }
 
 /* 왼쪽(룰렛) */
 .left {
-  position: relative; /* 포인터(::before) 기준 */
+  position: relative; /* 포인터 기준 */
 }
 
-/* ✅ 포인터: 이제 left 위에 붙임 */
+/* ✅ 포인터(룰렛 위 12시) */
 .left::before {
   content: "";
   position: absolute;
@@ -33,31 +34,27 @@ body {
   height: 50px;
   border-radius: 5px;
   background: #000;
-  top: -20px;
+  top: -20px; /* 룰렛 위쪽 살짝 위 */
   left: 50%;
   transform: translateX(-50%);
   z-index: 10;
 }
 
-/* 룰렛 */
 canvas {
   transition: 2s;
-  /* 기존 margin-top 제거: 좌/우 배치에서는 필요 없음 */
 }
 
-/* 오른쪽(컨트롤) */
+/* 오른쪽 컨트롤 */
 .right {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  margin-top: 90px; /* 룰렛 가운데 높이쯤 맞춰 보기 좋게 */
   min-width: 320px;
 }
 
-/* 버튼 묶음 */
-.btnRow {
+.btnCol {
   display: flex;
-  flex-direction: column; /* 오른쪽에 세로로 쌓기 */
+  flex-direction: column;
   gap: 10px;
 }
 
@@ -67,8 +64,8 @@ button {
   padding: 0.85rem 1.4rem;
   border: none;
   font-size: 1.1rem;
-  font-weight: bold;
-  border-radius: 8px;
+  font-weight: 900;
+  border-radius: 10px;
   cursor: pointer;
   transition: 0.2s;
 }
@@ -95,7 +92,7 @@ button:disabled {
   height: 44px;
   padding: 0 12px;
   font-size: 1rem;
-  border-radius: 8px;
+  border-radius: 10px;
   border: 1px solid #ddd;
   outline: none;
   background: #fff;
@@ -141,18 +138,18 @@ button:disabled {
   }
 }
 
-/* ✅ 모바일에서는 위/아래로 쌓이게(보너스) */
+/* ✅ 모바일: 위/아래로 */
 @media (max-width: 900px) {
   .container {
     flex-direction: column;
-    align-items: center;
     gap: 24px;
+    padding-top: 24px;
   }
   .right {
-    margin-top: 0;
     min-width: min(520px, 92vw);
+    width: min(520px, 92vw);
   }
-  .btnRow {
+  .btnCol {
     flex-direction: row;
     flex-wrap: wrap;
   }

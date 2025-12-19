@@ -29,7 +29,6 @@ const colors = [
 let currentRotation = 0;
 let isSpinning = false;
 
-/* 룰렛 그리기 */
 function newMake() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -57,6 +56,7 @@ function newMake() {
   const ch = canvas.height / 2;
   const arc = (2 * Math.PI) / product.length;
 
+  // 부채꼴
   for (let i = 0; i < product.length; i++) {
     ctx.beginPath();
     ctx.fillStyle = colors[i % colors.length];
@@ -66,6 +66,7 @@ function newMake() {
     ctx.closePath();
   }
 
+  // 글자
   ctx.fillStyle = "#fff";
   ctx.font = "bold 24px Pretendard";
   ctx.textAlign = "center";
@@ -83,16 +84,15 @@ function newMake() {
   }
 }
 
-/* 결과 계산 (화면 포인터(12시)와 일치) */
+/* 결과 계산(포인터 12시와 일치) */
 function getResult() {
   const slice = 360 / product.length;
   const deg = currentRotation % 360;
-  const pointerAngle = (270 + deg) % 360;
+  const pointerAngle = (270 + deg) % 360; // 12시(270°) + 회전각
   const index = Math.floor((pointerAngle + 0.0001) / slice) % product.length;
   return product[index];
 }
 
-/* 회전 */
 function rotate() {
   if (isSpinning) return;
   if (product.length < 2) return alert("메뉴를 2개 이상 추가하세요!");
@@ -105,13 +105,12 @@ function rotate() {
 
   setTimeout(() => {
     const randomDeg = Math.floor(Math.random() * 360);
-    currentRotation = randomDeg + 3600;
+    currentRotation = randomDeg + 3600; // 여러 바퀴 + 랜덤
     canvas.style.transition = "2s ease-out";
     canvas.style.transform = `rotate(-${currentRotation}deg)`;
   }, 1);
 }
 
-/* 메뉴 추가 */
 function addMenu() {
   const name = menuInput.value.trim();
   if (!name) return alert("메뉴를 입력해주세요!");
@@ -122,7 +121,6 @@ function addMenu() {
   newMake();
 }
 
-/* 초기화(기본값 복구) */
 function resetAll() {
   if (isSpinning) return;
   if (!confirm("기본 메뉴로 초기화할까요?")) return;
@@ -134,7 +132,6 @@ function resetAll() {
   newMake();
 }
 
-/* 전체삭제 */
 function clearAll() {
   if (isSpinning) return;
   if (!confirm("메뉴를 전부 삭제할까요?")) return;
@@ -146,7 +143,7 @@ function clearAll() {
   newMake();
 }
 
-/* 회전 종료 */
+/* 회전 끝나면 모달 띄우기 */
 canvas.addEventListener("transitionend", () => {
   if (!isSpinning) return;
 
