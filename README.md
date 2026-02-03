@@ -1,4 +1,4 @@
-# 🎡 Random Roulette (식사 메뉴 룰렛)
+# 🎯 Random Roulette (식사 메뉴 룰렛)
 
 HTML + CSS + Vanilla JavaScript 기반으로 제작한  
 Canvas 기반 랜덤 룰렛 웹 페이지입니다.
